@@ -126,8 +126,17 @@
   <data name="CancelButton" xml:space="preserve">
     <value>Cancel</value>
   </data>
+  <data name="DeleteAllButton" xml:space="preserve">
+    <value>Delete All</value>
+  </data>
+  <data name="DeleteButton" xml:space="preserve">
+    <value>Delete</value>
+  </data>
   <data name="EstateNameText" xml:space="preserve">
     <value>Estate name</value>
+  </data>
+  <data name="LoadButton" xml:space="preserve">
+    <value>Load</value>
   </data>
   <data name="ProfileText" xml:space="preserve">
     <value>Profile</value>

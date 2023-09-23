@@ -18,6 +18,7 @@
         <ResourceDictionary>
             <ResourceDictionary.MergedDictionaries>
                 <ResourceDictionary Source="../Resources/ParametersDictionary.xaml"/>
+                <ResourceDictionary Source="../Resources/ItemsControlDictionary.xaml"/>
             </ResourceDictionary.MergedDictionaries>
             <views:ParameterTemplateSelector x:Key="SettingsParameterTemplateSelector"
                                              FolderPathTemplate="{StaticResource MultilineFolderPathParameterDataTemplate}"
@@ -48,21 +49,9 @@
                       ItemTemplateSelector="{StaticResource SettingsParameterTemplateSelector}"
                       Grid.IsSharedSizeScope="True"
                       Margin="20"
-                      
-        >
-            <ItemsControl.ItemContainerStyle>
-                <Style TargetType="ContentPresenter">
-                    <Setter Property="Margin" Value="0 10 0 0"/>
-                    <Setter Property="Validation.ErrorTemplate" Value="{x:Null}"/>
-                    <Style.Triggers>
-                        <DataTrigger Binding="{Binding RelativeSource={RelativeSource PreviousData}}" Value="{x:Null}">
-                            <Setter Property="Margin" Value="0"/>
-                        </DataTrigger>
-                    </Style.Triggers>
+                      Style="{StaticResource VerticalItemsControlStyle}"
+                      />
 
-                </Style>
-            </ItemsControl.ItemContainerStyle>
-        </ItemsControl>
     </DockPanel>
 </Window>
 

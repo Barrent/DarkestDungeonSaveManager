@@ -88,11 +88,38 @@ namespace DarkestDungeonSaveManager.Resources {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to Delete All.
+        /// </summary>
+        public static string DeleteAllButton {
+            get {
+                return ResourceManager.GetString("DeleteAllButton", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Delete.
+        /// </summary>
+        public static string DeleteButton {
+            get {
+                return ResourceManager.GetString("DeleteButton", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to Estate name.
         /// </summary>
         public static string EstateNameText {
             get {
                 return ResourceManager.GetString("EstateNameText", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Load.
+        /// </summary>
+        public static string LoadButton {
+            get {
+                return ResourceManager.GetString("LoadButton", resourceCulture);
             }
         }
         

@@ -8,6 +8,24 @@
   </PropertyGroup>
 
   <ItemGroup>
+    <None Remove="Icons\Blueprint.png" />
+    <None Remove="Icons\Blueprint.webp" />
+    <None Remove="Icons\Bust.png" />
+    <None Remove="Icons\Bust.webp" />
+    <None Remove="Icons\Crest.png" />
+    <None Remove="Icons\Crest.webp" />
+    <None Remove="Icons\Deed.png" />
+    <None Remove="Icons\Deed.webp" />
+    <None Remove="Icons\Gold.gif" />
+    <None Remove="Icons\Gold.png" />
+    <None Remove="Icons\Gold.webp" />
+    <None Remove="Icons\Portrait.png" />
+    <None Remove="Icons\Portrait.webp" />
+    <None Remove="Icons\Shard.png" />
+    <None Remove="Icons\Shard.webp" />
+  </ItemGroup>
+
+  <ItemGroup>
     <PackageReference Include="Microsoft-WindowsAPICodePack-Shell" Version="1.1.5" />
     <PackageReference Include="Microsoft.Extensions.Hosting" Version="8.0.0-rc.1.23419.4" />
     <PackageReference Include="Newtonsoft.Json" Version="13.0.3" />
@@ -48,7 +66,13 @@
   </ItemGroup>
 
   <ItemGroup>
-    <Folder Include="Icons\" />
+    <Resource Include="Icons\Blueprint.png" />
+    <Resource Include="Icons\Bust.png" />
+    <Resource Include="Icons\Crest.png" />
+    <Resource Include="Icons\Deed.png" />
+    <Resource Include="Icons\Gold.png" />
+    <Resource Include="Icons\Portrait.png" />
+    <Resource Include="Icons\Shard.png" />
   </ItemGroup>
 
 </Project>
