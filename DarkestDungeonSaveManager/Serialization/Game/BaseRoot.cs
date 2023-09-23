@@ -2,7 +2,7 @@
 using System;
 using System.Text.Json.Serialization;
 
-namespace DarkestDungeonSaveManager.Serialization;
+namespace DarkestDungeonSaveManager.Serialization.Game;
 
 public class BaseRoot
 {

@@ -6,6 +6,7 @@
         xmlns:local="clr-namespace:DarkestDungeonSaveManager.Views"
         xmlns:viewModels="clr-namespace:DarkestDungeonSaveManager.Interfaces.ViewModels"
         xmlns:resources="clr-namespace:DarkestDungeonSaveManager.Resources"
+        xmlns:views="clr-namespace:Barrent.Common.WPF.Views;assembly=Barrent.Common.WPF"
         mc:Ignorable="d"
         Title="SettingsWindow" 
         Height="400" Width="400"
@@ -18,6 +19,9 @@
             <ResourceDictionary.MergedDictionaries>
                 <ResourceDictionary Source="../Resources/ParametersDictionary.xaml"/>
             </ResourceDictionary.MergedDictionaries>
+            <views:ParameterTemplateSelector x:Key="SettingsParameterTemplateSelector"
+                                             FolderPathTemplate="{StaticResource MultilineFolderPathParameterDataTemplate}"
+                                             />
         </ResourceDictionary>
     </Window.Resources>
     <DockPanel VerticalAlignment="Center">
@@ -41,7 +45,7 @@
         </Grid>
 
         <ItemsControl ItemsSource="{Binding Parameters}" 
-                      ItemTemplateSelector="{StaticResource ParameterTemplateSelector}"
+                      ItemTemplateSelector="{StaticResource SettingsParameterTemplateSelector}"
                       Grid.IsSharedSizeScope="True"
                       Margin="20"
                       
