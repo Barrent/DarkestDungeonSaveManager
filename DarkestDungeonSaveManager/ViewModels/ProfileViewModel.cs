@@ -1,4 +1,5 @@
-﻿using Barrent.Common.WPF.Interfaces.ViewModels;
+﻿using System.Collections.ObjectModel;
+using Barrent.Common.WPF.Interfaces.ViewModels.Parameters;
 using Barrent.Common.WPF.ViewModels.Parameters;
 using DarkestDungeonSaveManager.Interfaces.Models;
 using DarkestDungeonSaveManager.Interfaces.ViewModels;

@@ -6,7 +6,7 @@ public interface ISaveGame
 {
     IParameter<string> EstateName { get; }
 
-    IParameter<int> Days { get; }
+    IParameter<int> Week { get; }
     IParameter<int> Gold { get; }
     IParameter<int> Busts { get; }
     IParameter<int> Portraits { get; }
@@ -15,4 +15,5 @@ public interface ISaveGame
     IParameter<int> Blueprints { get; }
     IParameter<int> Shards { get; }
     IParameter<int> Memories { get; }
+    IParameter<string> Difficulty { get; set; }
 }

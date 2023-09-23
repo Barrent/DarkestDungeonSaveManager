@@ -132,8 +132,11 @@
   <data name="DeleteButton" xml:space="preserve">
     <value>Delete</value>
   </data>
-  <data name="EstateNameText" xml:space="preserve">
-    <value>Estate name</value>
+  <data name="DifficultyParameterName" xml:space="preserve">
+    <value>Difficulty</value>
+  </data>
+  <data name="EstateParameterName" xml:space="preserve">
+    <value>Name</value>
   </data>
   <data name="LoadButton" xml:space="preserve">
     <value>Load</value>
@@ -146,6 +149,12 @@
   </data>
   <data name="SavegameFolder" xml:space="preserve">
     <value>DD profiles folder</value>
+  </data>
+  <data name="SaveGameName" xml:space="preserve">
+    <value>Name</value>
+  </data>
+  <data name="WeekParameterName" xml:space="preserve">
+    <value>Week</value>
   </data>
   <data name="WrongSaveGameFolderSelected" xml:space="preserve">
     <value>Wrong save game folder has been selected. You can fix it later via settings menu.</value>

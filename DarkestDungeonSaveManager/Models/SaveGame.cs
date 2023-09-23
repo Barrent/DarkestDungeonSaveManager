@@ -2,6 +2,7 @@
 using Barrent.Common.WPF.Interfaces.Models;
 using Barrent.Common.WPF.Models;
 using DarkestDungeonSaveManager.Interfaces.Models;
+using DarkestDungeonSaveManager.Resources;
 
 namespace DarkestDungeonSaveManager.Models;
 
@@ -9,8 +10,10 @@ public class SaveGame : ISaveGame
 {
     public SaveGame()
     {
-        Days = new Parameter<int>(0);
-        EstateName = new Parameter<string>(String.Empty);
+        Week = new Parameter<int>(0) { Name = Strings.WeekParameterName };
+        EstateName = new Parameter<string>(string.Empty) { Name = Strings.EstateParameterName };
+        Difficulty = new Parameter<string>(string.Empty) { Name = Strings.DifficultyParameterName };
+
         Gold = new Parameter<int>(0);
         Busts = new Parameter<int>(0);
         Portraits = new Parameter<int>(0);
@@ -22,7 +25,7 @@ public class SaveGame : ISaveGame
     }
 
     public IParameter<string> EstateName { get; }
-    public IParameter<int> Days { get; }
+    public IParameter<int> Week { get; }
 
     public IParameter<int> Gold { get; }
 
@@ -39,4 +42,5 @@ public class SaveGame : ISaveGame
     public IParameter<int> Shards { get; }
 
     public IParameter<int> Memories { get; }
+    public IParameter<string> Difficulty { get; set; }
 }

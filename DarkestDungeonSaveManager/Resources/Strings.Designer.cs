@@ -106,11 +106,20 @@ namespace DarkestDungeonSaveManager.Resources {
         }
         
         /// <summary>
-        ///   Looks up a localized string similar to Estate name.
+        ///   Looks up a localized string similar to Difficulty.
         /// </summary>
-        public static string EstateNameText {
+        public static string DifficultyParameterName {
             get {
-                return ResourceManager.GetString("EstateNameText", resourceCulture);
+                return ResourceManager.GetString("DifficultyParameterName", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Name.
+        /// </summary>
+        public static string EstateParameterName {
+            get {
+                return ResourceManager.GetString("EstateParameterName", resourceCulture);
             }
         }
         
@@ -147,6 +156,24 @@ namespace DarkestDungeonSaveManager.Resources {
         public static string SavegameFolder {
             get {
                 return ResourceManager.GetString("SavegameFolder", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Name.
+        /// </summary>
+        public static string SaveGameName {
+            get {
+                return ResourceManager.GetString("SaveGameName", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Week.
+        /// </summary>
+        public static string WeekParameterName {
+            get {
+                return ResourceManager.GetString("WeekParameterName", resourceCulture);
             }
         }
         

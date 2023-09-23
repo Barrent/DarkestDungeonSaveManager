@@ -30,8 +30,9 @@ public class Profile : IProfile
         var persistGame = _serializer.ReadPersistGame(FolderPath.Value);
         if (persistGame != null)
         {
-            ActiveSave.Days.Value = persistGame.BaseRoot.TotalElapsed;
+            ActiveSave.Week.Value = persistGame.BaseRoot.TotalElapsed;
             ActiveSave.EstateName.Value = persistGame.BaseRoot.EstateName;
+            ActiveSave.Difficulty.Value = persistGame.BaseRoot.GameMode;
         }
 
         var persistEstate = _serializer.ReadPersistEstate(FolderPath.Value);

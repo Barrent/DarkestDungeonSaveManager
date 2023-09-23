@@ -1,4 +1,4 @@
-﻿using Barrent.Common.WPF.Interfaces.ViewModels;
+﻿using Barrent.Common.WPF.Interfaces.ViewModels.Parameters;
 
 namespace DarkestDungeonSaveManager.Interfaces.ViewModels;
 

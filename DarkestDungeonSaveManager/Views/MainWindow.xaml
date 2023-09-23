@@ -20,6 +20,8 @@
                 <ResourceDictionary Source="../Resources/DataGridDictionary.xaml"/>
                 <ResourceDictionary Source="../Resources/ItemsControlDictionary.xaml"/>
                 <ResourceDictionary Source="../Resources/MenuDictionary.xaml"/>
+                <ResourceDictionary Source="../Resources/ParametersDictionary.xaml"/>
+                <ResourceDictionary Source="../Resources/TextBoxDictionary.xaml"/>
             </ResourceDictionary.MergedDictionaries>
         </ResourceDictionary>
     </Window.Resources>
@@ -49,16 +51,12 @@
             </DockPanel>
 
             <!-- Save game info -->
-            <Grid DockPanel.Dock="Top" DataContext="{Binding ActiveProfile}" Margin="0 10 0 0">
-                <Grid.ColumnDefinitions>
-                    <ColumnDefinition Width="Auto"/>
-                    <ColumnDefinition Width="10"/>
-                    <ColumnDefinition/>
-                </Grid.ColumnDefinitions>
-
-                <TextBlock Grid.Column="0" Text="{Binding Source={x:Static resources:Strings.EstateNameText}, StringFormat={}{0}: }"/>
-                <TextBlock Grid.Column="2" Text="{Binding ActiveSaveGame.EstateName.Value}"/>
-            </Grid>
+            <ItemsControl DockPanel.Dock="Top" 
+                          DataContext="{Binding ActiveProfile}" 
+                          Margin="0 10 0 0" 
+                          ItemsSource="{Binding ActiveSaveGame.Parameters}"
+                          Style="{StaticResource HorizontalItemsControlStyle}"
+                          ItemTemplateSelector="{StaticResource ParameterTemplateSelector}"/>
 
             <!-- Resources -->
             <ItemsControl DockPanel.Dock="Top"
@@ -70,7 +68,7 @@
                     <DataTemplate DataType="{x:Type viewModels:IResourceViewModel`1}">
                         <DockPanel Height="30">
                             <Image DockPanel.Dock="Left" Source="{Binding Type, Converter={StaticResource ResourceToUriConverter}}" Stretch="Uniform"/>
-                            <TextBlock Margin="5 0 0 0" Text="{Binding Value}" VerticalAlignment="Bottom"/>
+                            <TextBox Margin="5 0 0 0" Text="{Binding Value}" VerticalAlignment="Bottom" Style="{StaticResource ReadOnlyTextBoxStyle}"/>
                         </DockPanel>
                     </DataTemplate>
                 </ItemsControl.ItemTemplate>
@@ -95,8 +93,8 @@
             <!-- Backups -->
             <DataGrid CanUserDeleteRows="False" CanUserAddRows="False" IsReadOnly="True" Margin="0 10 0 0">
                 <DataGrid.Columns>
-                    <DataGridTextColumn Header="Name" Width="*" />
-                    <DataGridTextColumn Header="Day" />
+                    <DataGridTextColumn Header="{x:Static resources:Strings.SaveGameName}" Width="*" />
+                    <DataGridTextColumn Header="{x:Static resources:Strings.WeekParameterName}"/>
 
                     <DataGridTextColumn
                         Header="pack://application:,,,/DarkestDungeonSaveManager;component/Icons/Gold.png"

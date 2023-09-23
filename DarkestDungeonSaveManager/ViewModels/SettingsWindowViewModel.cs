@@ -3,7 +3,7 @@ using System.Collections.ObjectModel;
 using System.Windows.Input;
 using Barrent.Common.WPF.Interfaces.Models;
 using Barrent.Common.WPF.Interfaces.Services;
-using Barrent.Common.WPF.Interfaces.ViewModels;
+using Barrent.Common.WPF.Interfaces.ViewModels.Parameters;
 using Barrent.Common.WPF.Models;
 using Barrent.Common.WPF.ViewModels;
 using Barrent.Common.WPF.ViewModels.Parameters;

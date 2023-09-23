@@ -1,5 +1,5 @@
 ﻿using System.Collections.ObjectModel;
-using Barrent.Common.WPF.Interfaces.ViewModels;
+using Barrent.Common.WPF.Interfaces.ViewModels.Parameters;
 using Barrent.Common.WPF.ViewModels.Parameters;
 using DarkestDungeonSaveManager.Interfaces.Models;
 using DarkestDungeonSaveManager.Interfaces.ViewModels;
@@ -11,8 +11,12 @@ public class SaveGameViewModel : ISaveGameViewModel
 {
     public SaveGameViewModel(ISaveGame saveGame)
     {
-        EstateName = new ParameterViewModel<string>(saveGame.EstateName);
-        Days = new ParameterViewModel<int>(saveGame.Days);
+        Parameters = new ObservableCollection<IParameterViewModel>()
+        {
+            new ParameterViewModel<string>(saveGame.EstateName, true),
+            new ParameterViewModel<int>(saveGame.Week, true),
+            new ParameterViewModel<string>(saveGame.Difficulty, true)
+        };
 
         Resources = new ObservableCollection<IResourceViewModel<int>>
         {
@@ -25,8 +29,8 @@ public class SaveGameViewModel : ISaveGameViewModel
             new ResourceViewModel<int>(saveGame.Blueprints, ResourceType.Blueprint)
         };
     }
-    public IParameterViewModel<string> EstateName { get; }
-    public IParameterViewModel<int> Days { get; }
 
     public ObservableCollection<IResourceViewModel<int>> Resources { get; }
+
+    public ObservableCollection<IParameterViewModel> Parameters { get; }
 }
