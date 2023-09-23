@@ -1,9 +1,10 @@
 ﻿using System.IO;
 using Barrent.Common.WPF.Interfaces.Services;
 using Barrent.Common.WPF.Services;
-using DarkestDungeonSaveManager.Interfaces.Models.Settings;
+using DarkestDungeonSaveManager.Interfaces.Models;
+using DarkestDungeonSaveManager.Interfaces.Serialization;
 using DarkestDungeonSaveManager.Interfaces.Services;
-using DarkestDungeonSaveManager.Models.Settings;
+using DarkestDungeonSaveManager.Serialization;
 using DarkestDungeonSaveManager.ViewModels;
 using DarkestDungeonSaveManager.Views;
 
@@ -11,38 +12,49 @@ namespace DarkestDungeonSaveManager.Services;
 
 public class SettingsService : ISettingsService
 {
-    private readonly ISettingsSerializer _serializer;
+    private readonly ISettingsSerializer _settingsSerializer;
+    private readonly IProfileSerializer _profileSerializer;
     private readonly IDialogService _dialogService;
+    private readonly IAppSettings _settings;
+    private readonly IProfileManager _profileManager;
 
-    public SettingsService(ISettingsSerializer serializer, IDialogService dialogService)
+    public SettingsService(IDialogService dialogService, 
+        ISettingsSerializer settingsSerializer,
+        IProfileSerializer profileSerializer,
+        IAppSettings settings,
+        IProfileManager profileManager)
     {
-        _serializer = serializer;
+        _settingsSerializer = settingsSerializer;
+        _profileSerializer = profileSerializer;
         _dialogService = dialogService;
-        Settings = new AppSettings();
+        _settings = settings;
+        _profileManager = profileManager;
     }
-
-    public IAppSettings Settings { get; }
 
     public void LoadSettings()
     {
-        _serializer.Load(Settings);
+        _settingsSerializer.Load(_settings);
 
-        if (!Directory.Exists(Settings.BackupFolderPath.Value) || !Directory.Exists(Settings.SaveGameFolderPath.Value))
+        if (!Directory.Exists(_settings.BackupFolderPath.Value)
+            || !Directory.Exists(_settings.SaveGameFolderPath.Value))
         {
             ShowEditor();
         }
+
+        _profileSerializer.Load(_profileManager);
     }
+
 
     public void SaveSettings()
     {
-        _serializer.Save(Settings);
+        _settingsSerializer.Save(_settings);
     }
 
     public void ShowEditor()
     {
         var window = new SettingsWindow();
         var windowController = new WindowController(window);
-        var viewModel = new SettingsWindowViewModel(windowController, _dialogService, Settings);
+        var viewModel = new SettingsWindowViewModel(windowController, _dialogService, _settings);
         window.DataContext = viewModel;
         if (_dialogService.ShowDialog(window) == true)
         {

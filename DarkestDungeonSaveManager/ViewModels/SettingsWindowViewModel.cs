@@ -7,7 +7,7 @@ using Barrent.Common.WPF.Interfaces.ViewModels;
 using Barrent.Common.WPF.Models;
 using Barrent.Common.WPF.ViewModels;
 using Barrent.Common.WPF.ViewModels.Parameters;
-using DarkestDungeonSaveManager.Interfaces.Models.Settings;
+using DarkestDungeonSaveManager.Interfaces.Models;
 using DarkestDungeonSaveManager.Interfaces.ViewModels;
 using Prism.Commands;
 

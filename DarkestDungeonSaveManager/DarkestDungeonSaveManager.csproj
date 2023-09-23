@@ -14,6 +14,15 @@
   </ItemGroup>
 
   <ItemGroup>
+    <ProjectReference Include="..\..\Barrent.Common\Barrent.Common.WPF\Barrent.Common.WPF.csproj" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <Compile Update="Resources\MenuResources.Designer.cs">
+      <DesignTime>True</DesignTime>
+      <AutoGen>True</AutoGen>
+      <DependentUpon>MenuResources.resx</DependentUpon>
+    </Compile>
     <Compile Update="Resources\Strings.Designer.cs">
       <DesignTime>True</DesignTime>
       <AutoGen>True</AutoGen>
@@ -22,10 +31,20 @@
   </ItemGroup>
 
   <ItemGroup>
+    <EmbeddedResource Update="Resources\MenuResources.resx">
+      <Generator>PublicResXFileCodeGenerator</Generator>
+      <LastGenOutput>MenuResources.Designer.cs</LastGenOutput>
+    </EmbeddedResource>
     <EmbeddedResource Update="Resources\Strings.resx">
       <Generator>PublicResXFileCodeGenerator</Generator>
       <LastGenOutput>Strings.Designer.cs</LastGenOutput>
     </EmbeddedResource>
+  </ItemGroup>
+
+  <ItemGroup>
+    <None Update="darkest-savior.so">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </None>
   </ItemGroup>
 
 </Project>

@@ -4,11 +4,61 @@
         xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
         xmlns:local="clr-namespace:DarkestDungeonSaveManager"
+        xmlns:resources="clr-namespace:DarkestDungeonSaveManager.Resources"
+        xmlns:viewModels="clr-namespace:DarkestDungeonSaveManager.Interfaces.ViewModels"
         mc:Ignorable="d"
-        Title="MainWindow" Height="450" Width="800"
+        Title="MainWindow" Height="450" Width="400"
         WindowStartupLocation="CenterScreen"
+        d:DataContext="{d:DesignInstance viewModels:IMainWindowViewModel}"
         >
-    <Grid>
+    <Window.Resources>
+        <ResourceDictionary>
+            <ResourceDictionary.MergedDictionaries>
+                <ResourceDictionary Source="../Resources/MenuDictionary.xaml"/>
+            </ResourceDictionary.MergedDictionaries>
+        </ResourceDictionary>
+    </Window.Resources>
+    <DockPanel>
+        <Menu DockPanel.Dock="Top" 
+              DataContext="{Binding MenuViewModel}" 
+              IsMainMenu="True" 
+              ItemsSource="{Binding Items}"
+              ItemContainerStyle="{StaticResource MenuItemStyle}"
+              />
 
-    </Grid>
+        <DockPanel Margin="20" LastChildFill="False">
+
+            <!-- Profile selector -->
+            <DockPanel Dock="Top">
+                <TextBlock DockPanel.Dock="Left" Text="{Binding Source={x:Static resources:Strings.ProfileText}, StringFormat={}{0}:}"/>
+                <Button DockPanel.Dock="Right" Command="{Binding SaveCommand}" Content="{x:Static resources:Strings.SaveButton}" />
+                <ComboBox Margin="10 0"
+                          ItemsSource="{Binding Profiles}"
+                          SelectedItem="{Binding ActiveProfile}"
+                          DisplayMemberPath="Name.Value"/>
+                
+            </DockPanel>
+
+            <!-- Save game info -->
+            <Grid DockPanel.Dock="Top" DataContext="{Binding ActiveProfile}">
+                <Grid.ColumnDefinitions>
+                    <ColumnDefinition Width="Auto"/>
+                    <ColumnDefinition Width="10"/>
+                    <ColumnDefinition/>
+                </Grid.ColumnDefinitions>
+
+                <TextBlock Grid.Column="0" Text="{Binding Source={x:Static resources:Strings.EstateNameText}, StringFormat={}{0}: }"/>
+                <TextBlock Grid.Column="2" Text="{Binding ActiveSaveGame.EstateName.Value}"/>
+            </Grid>
+
+            <!-- Backup controls -->
+            <Grid DockPanel.Dock="Bottom">
+
+            </Grid>
+
+            <!-- Backups -->
+            <ItemsControl />
+        </DockPanel>
+
+    </DockPanel>
 </Window>

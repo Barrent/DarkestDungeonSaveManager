@@ -126,6 +126,15 @@
   <data name="CancelButton" xml:space="preserve">
     <value>Cancel</value>
   </data>
+  <data name="EstateNameText" xml:space="preserve">
+    <value>Estate name</value>
+  </data>
+  <data name="ProfileText" xml:space="preserve">
+    <value>Profile</value>
+  </data>
+  <data name="SaveButton" xml:space="preserve">
+    <value>Save</value>
+  </data>
   <data name="SavegameFolder" xml:space="preserve">
     <value>DD profiles folder</value>
   </data>

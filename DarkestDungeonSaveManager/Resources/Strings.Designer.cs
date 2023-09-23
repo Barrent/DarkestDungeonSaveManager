@@ -88,6 +88,33 @@ namespace DarkestDungeonSaveManager.Resources {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to Estate name.
+        /// </summary>
+        public static string EstateNameText {
+            get {
+                return ResourceManager.GetString("EstateNameText", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Profile.
+        /// </summary>
+        public static string ProfileText {
+            get {
+                return ResourceManager.GetString("ProfileText", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Save.
+        /// </summary>
+        public static string SaveButton {
+            get {
+                return ResourceManager.GetString("SaveButton", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to DD profiles folder.
         /// </summary>
         public static string SavegameFolder {

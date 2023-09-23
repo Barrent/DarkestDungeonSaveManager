@@ -1,11 +1,13 @@
 ﻿using System.Windows;
 using Barrent.Common.WPF.Interfaces.Services;
+using Barrent.Common.WPF.Services;
 using Barrent.Common.WPF.ViewModels;
 using DarkestDungeonSaveManager.Interfaces.Models;
-using DarkestDungeonSaveManager.Interfaces.Models.Settings;
+using DarkestDungeonSaveManager.Interfaces.Serialization;
 using DarkestDungeonSaveManager.Interfaces.Services;
+using DarkestDungeonSaveManager.Interfaces.ViewModels;
 using DarkestDungeonSaveManager.Models;
-using DarkestDungeonSaveManager.Models.Settings;
+using DarkestDungeonSaveManager.Serialization;
 using DarkestDungeonSaveManager.Services;
 using DarkestDungeonSaveManager.ViewModels;
 using DarkestDungeonSaveManager.Views;
@@ -30,8 +32,8 @@ namespace DarkestDungeonSaveManager
         {
             await appHost.StartAsync();
 
-            var window = appHost.Services.GetRequiredService<MainWindow>();
-            var viewModel = appHost.Services.GetRequiredService<MainWindowViewModel>();
+            var window = appHost.Services.GetKeyedService<Window>(ServiceKey.Main);
+            var viewModel = appHost.Services.GetRequiredService<IMainWindowViewModel>();
             window.DataContext = viewModel;
             window.Show();
 
@@ -49,11 +51,21 @@ namespace DarkestDungeonSaveManager
 
         private void Register(HostBuilderContext context, IServiceCollection services)
         {
-            services.AddSingleton<MainWindow>();
-            services.AddSingleton<MainWindowViewModel>();
+            services.AddSingleton<IDialogService, DialogService>();
+
+            services.AddKeyedSingleton<Window, MainWindow>(ServiceKey.Main);
+            services.AddSingleton<IMainWindowController, MainWindowController>();
+
+            services.AddSingleton<ISaveGameSerializer, SaveGameSerializer>();
             services.AddSingleton<ISettingsSerializer, SettingsSerializer>();
+            services.AddSingleton<IProfileSerializer, ProfileSerializer>();
+            services.AddSingleton<IAppSettings, AppSettings>();
+            services.AddSingleton<IProfileManager, ProfileManager>();
             services.AddSingleton<ISettingsService, SettingsService>();
-            services.AddSingleton<IDialogService, DialogService>(s => new DialogService(s.GetRequiredService<MainWindow>()));
+
+            services.AddSingleton<IMainWindowViewModel, MainWindowViewModel>();
+            services.AddSingleton<IMainMenuViewModel, MainMenuViewModel>();
+
         }
     }
 }
