@@ -18,4 +18,5 @@ public interface IProfileViewModel
     ICommand DeleteAllCommand { get; }
 
     ICommand LoadCommand { get; }
+    public ICommand RefreshCommand { get; }
 }

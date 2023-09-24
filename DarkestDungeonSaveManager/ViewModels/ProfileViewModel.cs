@@ -17,8 +17,6 @@ public class ProfileViewModel : ViewModelBase, IProfileViewModel
 {
     private readonly IProfile _profile;
 
-    private ISaveGameViewModel? _selectedSave;
-
     public ProfileViewModel(IProfile profile)
     {
         _profile = profile;
@@ -36,6 +34,7 @@ public class ProfileViewModel : ViewModelBase, IProfileViewModel
         DeleteCommand = new RelayCommand(Delete, IsAnySelected);
         DeleteAllCommand = new RelayCommand(DeleteAll, p => Saves.Count > 0);
         LoadCommand = new RelayCommand(Load, IsSingleSelected);
+        RefreshCommand = new RelayCommand(Refresh);
     }
 
     public ISaveGameViewModel ActiveSaveGame { get; }
@@ -47,6 +46,8 @@ public class ProfileViewModel : ViewModelBase, IProfileViewModel
     public ICommand LoadCommand { get; }
 
     public IParameterViewModel<string> Name { get; }
+
+    public ICommand RefreshCommand { get; }
 
     public ICommand SaveCommand { get; }
 
@@ -71,11 +72,6 @@ public class ProfileViewModel : ViewModelBase, IProfileViewModel
         }
     }
 
-    private ISaveGame? FindModel(ISaveGameViewModel viewModel)
-    {
-        return _profile.Saves.FirstOrDefault(s => string.Equals(s.Path, viewModel.Path.Value, StringComparison.InvariantCultureIgnoreCase));
-    }
-
     private void DeleteAll(object obj)
     {
         var saves = _profile.Saves.ToArray();
@@ -83,6 +79,11 @@ public class ProfileViewModel : ViewModelBase, IProfileViewModel
         {
             _profile.Delete(saveGame);
         }
+    }
+
+    private ISaveGame? FindModel(ISaveGameViewModel viewModel)
+    {
+        return _profile.Saves.FirstOrDefault(s => string.Equals(s.Path, viewModel.Path.Value, StringComparison.InvariantCultureIgnoreCase));
     }
 
     private bool IsAnySelected(object parameter)
@@ -118,6 +119,11 @@ public class ProfileViewModel : ViewModelBase, IProfileViewModel
                 i--;
             }
         }
+    }
+
+    private void Refresh(object obj)
+    {
+        _profile.Load(_profile.ActiveSave);
     }
     private void Save(object parameter)
     {

@@ -43,8 +43,16 @@
                         Command="{Binding SaveCommand}"
                         Content="{x:Static resources:Strings.SaveButton}" 
                         DataContext="{Binding ActiveProfile}"
+                        Margin="10 0 0 0"
                         Width="100"/>
-                <ComboBox Margin="10 0"
+
+                <Button DockPanel.Dock="Right" 
+                        Command="{Binding RefreshCommand}"
+                        Content="{x:Static resources:Strings.RefreshButton}" 
+                        DataContext="{Binding ActiveProfile}"
+                        Margin="10 0 0 0"
+                        Width="100"/>
+                <ComboBox Margin="10 0 0 0"
                           ItemsSource="{Binding Profiles}"
                           SelectedItem="{Binding ActiveProfile}"
                           DisplayMemberPath="Name.Value"/>

@@ -150,6 +150,9 @@
   <data name="ProfileText" xml:space="preserve">
     <value>Profile</value>
   </data>
+  <data name="RefreshButton" xml:space="preserve">
+    <value>Refresh</value>
+  </data>
   <data name="SaveButton" xml:space="preserve">
     <value>Save</value>
   </data>

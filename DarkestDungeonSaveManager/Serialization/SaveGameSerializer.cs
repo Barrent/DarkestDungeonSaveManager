@@ -41,12 +41,12 @@ public class SaveGameSerializer : ISaveGameSerializer
         }
 
         var bytes = File.ReadAllBytes(path);
-        var weekBytes = new[]
+        var weekBytes = new byte[]
         {
             bytes[^4],
             bytes[^5],
-            bytes[^6],
-            bytes[^7]
+            0,
+            0
         };
         var totalWeeks = BitConverter.ToInt32(weekBytes);
         return new PersistCampaignLog
