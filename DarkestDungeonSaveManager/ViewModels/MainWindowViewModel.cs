@@ -21,7 +21,6 @@ public class MainWindowViewModel : ViewModelBase, IMainWindowViewModel
         _profileManager.ProfilesChanged += OnProfilesChanged;
         MenuViewModel = menuViewModel;
         Profiles = new ObservableCollection<IProfileViewModel>();
-        SaveCommand = new RelayCommand(Save, CanSave);
 
         InitProfiles();
     }
@@ -36,12 +35,7 @@ public class MainWindowViewModel : ViewModelBase, IMainWindowViewModel
 
     public ObservableCollection<IProfileViewModel> Profiles { get; }
 
-    public ICommand SaveCommand { get; }
-
-    private bool CanSave(object obj)
-    {
-        return ActiveProfile != null;
-    }
+   
 
     private IProfileViewModel CreateProfile(IProfile profile)
     {
@@ -59,8 +53,5 @@ public class MainWindowViewModel : ViewModelBase, IMainWindowViewModel
         InitProfiles();
     }
 
-    private void Save(object parameter)
-    {
-        // TODO: display window to set savegame name
-    }
+
 }

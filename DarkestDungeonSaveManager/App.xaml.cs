@@ -52,6 +52,7 @@ namespace DarkestDungeonSaveManager
         private void Register(HostBuilderContext context, IServiceCollection services)
         {
             services.AddSingleton<IDialogService, DialogService>();
+            services.AddSingleton<IBackupService, BackupService>();
 
             services.AddKeyedSingleton<Window, MainWindow>(ServiceKey.Main);
             services.AddSingleton<IMainWindowController, MainWindowController>();

@@ -1,10 +1,9 @@
 ﻿using Newtonsoft.Json;
 
-namespace DarkestDungeonSaveManager.Serialization.Game;
+namespace DarkestDungeonSaveManager.Serialization.CampaignLog;
 
-public class PersistGame
+public class PersistCampaignLog
 {
     [JsonProperty(PropertyName = "base_root")]
     public BaseRoot BaseRoot { get; set; }
-
 }

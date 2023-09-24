@@ -2,7 +2,10 @@
                     xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
                     xmlns:converters="clr-namespace:DarkestDungeonSaveManager.Converters">
 
-    <converters:ResourceToUriConverter 
-        x:Key="ResourceToUriConverter"/>
+    <ResourceDictionary.MergedDictionaries>
+        <ResourceDictionary Source="/Barrent.Common.WPF;component/Resources/ConvertersDictionary.xaml"/>
+    </ResourceDictionary.MergedDictionaries>
+
+    <converters:ResourceToUriConverter x:Key="ResourceToUriConverter"/>
 
 </ResourceDictionary>

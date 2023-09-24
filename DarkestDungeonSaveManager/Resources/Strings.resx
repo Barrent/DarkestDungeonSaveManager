@@ -123,8 +123,14 @@
   <data name="BackupFolder" xml:space="preserve">
     <value>Backup folder</value>
   </data>
+  <data name="BackupNameColumnHeader" xml:space="preserve">
+    <value>Backup</value>
+  </data>
   <data name="CancelButton" xml:space="preserve">
     <value>Cancel</value>
+  </data>
+  <data name="DateParameterName" xml:space="preserve">
+    <value>Date</value>
   </data>
   <data name="DeleteAllButton" xml:space="preserve">
     <value>Delete All</value>

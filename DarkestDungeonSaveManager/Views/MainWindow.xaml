@@ -8,7 +8,7 @@
         xmlns:viewModels="clr-namespace:DarkestDungeonSaveManager.Interfaces.ViewModels"
         xmlns:views="clr-namespace:Barrent.Common.WPF.Views;assembly=Barrent.Common.WPF"
         mc:Ignorable="d"
-        Title="Darkest Dungeon Save Manager" Height="450" Width="600"
+        Title="Darkest Dungeon Save Manager" Height="600" Width="800"
         WindowStartupLocation="CenterScreen"
         d:DataContext="{d:DesignInstance viewModels:IMainWindowViewModel}"
         FontSize="14"
@@ -42,6 +42,7 @@
                 <Button DockPanel.Dock="Right" 
                         Command="{Binding SaveCommand}"
                         Content="{x:Static resources:Strings.SaveButton}" 
+                        DataContext="{Binding ActiveProfile}"
                         Width="100"/>
                 <ComboBox Margin="10 0"
                           ItemsSource="{Binding Profiles}"
@@ -75,7 +76,7 @@
             </ItemsControl>
 
             <!-- Backup controls -->
-            <Grid DockPanel.Dock="Bottom" Margin="0 10 0 0">
+            <Grid DockPanel.Dock="Bottom" Margin="0 10 0 0" DataContext="{Binding ActiveProfile}">
                 <Grid.ColumnDefinitions>
                     <ColumnDefinition/>
                     <ColumnDefinition Width="10"/>
@@ -84,51 +85,74 @@
                     <ColumnDefinition/>
                 </Grid.ColumnDefinitions>
 
-                <Button Grid.Column="0" Content="{x:Static resources:Strings.LoadButton}" />
-                <Button Grid.Column="2" Content="{x:Static resources:Strings.DeleteButton}" />
-                <Button Grid.Column="4" Content="{x:Static resources:Strings.DeleteAllButton}" />
+                <Button Grid.Column="0" Content="{x:Static resources:Strings.LoadButton}" Command="{Binding LoadCommand}" />
+                <Button Grid.Column="2" Content="{x:Static resources:Strings.DeleteButton}" Command="{Binding DeleteCommand}"/>
+                <Button Grid.Column="4" Content="{x:Static resources:Strings.DeleteAllButton}" Command="{Binding DeleteAllCommand}"/>
 
             </Grid>
 
             <!-- Backups -->
-            <DataGrid CanUserDeleteRows="False" CanUserAddRows="False" IsReadOnly="True" Margin="0 10 0 0">
+            <DataGrid CanUserDeleteRows="False"
+                      CanUserAddRows="False"
+                      DataContext="{Binding ActiveProfile}"
+                      IsReadOnly="True"
+                      Margin="0 10 0 0"
+                      ItemsSource="{Binding Saves}"
+                      AutoGenerateColumns="False"
+                      SelectionUnit="FullRow"
+                      RowStyle="{StaticResource SelectableDataGridRowStyle}"
+                      >
+                <DataGrid.InputBindings>
+                    <KeyBinding Key="Delete" Command="{Binding DeleteCommand}"
+                                CommandParameter="{Binding RelativeSource={RelativeSource Mode=FindAncestor, AncestorType=DataGrid}, Path=SelectedItem}" />
+                </DataGrid.InputBindings>
                 <DataGrid.Columns>
-                    <DataGridTextColumn Header="{x:Static resources:Strings.SaveGameName}" Width="*" />
-                    <DataGridTextColumn Header="{x:Static resources:Strings.WeekParameterName}"/>
+                    <DataGridTextColumn Binding="{Binding Name.Value}"
+                                        Header="{x:Static resources:Strings.BackupNameColumnHeader}"
+                                        Width="*" 
+                                        />
 
-                    <DataGridTextColumn
-                        Header="pack://application:,,,/DarkestDungeonSaveManager;component/Icons/Gold.png"
-                        HeaderTemplate="{StaticResource ImageDataGridColumnHeaderTemplate}"
+                    <DataGridTextColumn Binding="{Binding Week.Value}"
+                                        Header="{x:Static resources:Strings.WeekParameterName}"
+                                        />
+
+                    <DataGridTextColumn Binding="{Binding Date.Value, Converter={StaticResource DateTimeToStringConverter}}"
+                                        Header="{x:Static resources:Strings.DateParameterName}"
+                                        />
+
+                    <DataGridTextColumn Binding="{Binding Gold.Value}"
+                                        Header="pack://application:,,,/DarkestDungeonSaveManager;component/Icons/Gold.png"
+                                        HeaderTemplate="{StaticResource ImageDataGridColumnHeaderTemplate}"
+                                        />
+
+                    <DataGridTextColumn Binding="{Binding Busts.Value}"
+                                        Header="pack://application:,,,/DarkestDungeonSaveManager;component/Icons/Bust.png"
+                                        HeaderTemplate="{StaticResource ImageDataGridColumnHeaderTemplate}"
                     />
 
-                    <DataGridTextColumn
-                        Header="pack://application:,,,/DarkestDungeonSaveManager;component/Icons/Bust.png"
-                        HeaderTemplate="{StaticResource ImageDataGridColumnHeaderTemplate}"
+                    <DataGridTextColumn Binding="{Binding Portraits.Value}"
+                                        Header="pack://application:,,,/DarkestDungeonSaveManager;component/Icons/Portrait.png"
+                                        HeaderTemplate="{StaticResource ImageDataGridColumnHeaderTemplate}"
                     />
 
-                    <DataGridTextColumn
-                        Header="pack://application:,,,/DarkestDungeonSaveManager;component/Icons/Portrait.png"
-                        HeaderTemplate="{StaticResource ImageDataGridColumnHeaderTemplate}"
+                    <DataGridTextColumn Binding="{Binding Deeds.Value}"
+                                        Header="pack://application:,,,/DarkestDungeonSaveManager;component/Icons/Deed.png"
+                                        HeaderTemplate="{StaticResource ImageDataGridColumnHeaderTemplate}"
                     />
 
-                    <DataGridTextColumn
-                        Header="pack://application:,,,/DarkestDungeonSaveManager;component/Icons/Deed.png"
-                        HeaderTemplate="{StaticResource ImageDataGridColumnHeaderTemplate}"
+                    <DataGridTextColumn Binding="{Binding Crests.Value}"
+                                        Header="pack://application:,,,/DarkestDungeonSaveManager;component/Icons/Crest.png"
+                                        HeaderTemplate="{StaticResource ImageDataGridColumnHeaderTemplate}"
                     />
 
-                    <DataGridTextColumn
-                        Header="pack://application:,,,/DarkestDungeonSaveManager;component/Icons/Crest.png"
-                        HeaderTemplate="{StaticResource ImageDataGridColumnHeaderTemplate}"
+                    <DataGridTextColumn Binding="{Binding Shards.Value}"
+                                        Header="pack://application:,,,/DarkestDungeonSaveManager;component/Icons/Shard.png"
+                                        HeaderTemplate="{StaticResource ImageDataGridColumnHeaderTemplate}"
                     />
 
-                    <DataGridTextColumn
-                        Header="pack://application:,,,/DarkestDungeonSaveManager;component/Icons/Shard.png"
-                        HeaderTemplate="{StaticResource ImageDataGridColumnHeaderTemplate}"
-                    />
-
-                    <DataGridTextColumn
-                        Header="pack://application:,,,/DarkestDungeonSaveManager;component/Icons/Blueprint.png"
-                        HeaderTemplate="{StaticResource ImageDataGridColumnHeaderTemplate}"
+                    <DataGridTextColumn Binding="{Binding Blueprints.Value}"
+                                        Header="pack://application:,,,/DarkestDungeonSaveManager;component/Icons/Blueprint.png"
+                                        HeaderTemplate="{StaticResource ImageDataGridColumnHeaderTemplate}"
                     />
 
                 </DataGrid.Columns>

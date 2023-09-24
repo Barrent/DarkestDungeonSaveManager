@@ -22,6 +22,8 @@ public class SaveGame : ISaveGame
         Blueprints = new Parameter<int>(0);
         Shards = new Parameter<int>(0);
         Memories = new Parameter<int>(0);
+        IsInRaid = new Parameter<bool>(false);
+        Date = new Parameter<DateTime>(DateTime.MinValue);
     }
 
     public IParameter<string> EstateName { get; }
@@ -43,4 +45,7 @@ public class SaveGame : ISaveGame
 
     public IParameter<int> Memories { get; }
     public IParameter<string> Difficulty { get; set; }
+    public IParameter<bool> IsInRaid { get; set; }
+    public IParameter<DateTime> Date { get; set; }
+    public string Path { get; set; }
 }

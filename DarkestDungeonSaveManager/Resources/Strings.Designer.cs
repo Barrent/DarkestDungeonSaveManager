@@ -79,11 +79,29 @@ namespace DarkestDungeonSaveManager.Resources {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to Backup.
+        /// </summary>
+        public static string BackupNameColumnHeader {
+            get {
+                return ResourceManager.GetString("BackupNameColumnHeader", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to Cancel.
         /// </summary>
         public static string CancelButton {
             get {
                 return ResourceManager.GetString("CancelButton", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Date.
+        /// </summary>
+        public static string DateParameterName {
+            get {
+                return ResourceManager.GetString("DateParameterName", resourceCulture);
             }
         }
         
