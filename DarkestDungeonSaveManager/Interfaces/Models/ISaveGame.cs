@@ -1,5 +1,5 @@
 ﻿using System;
-using Barrent.Common.WPF.Interfaces.Models;
+using Barrent.Common.Interfaces.Models;
 
 namespace DarkestDungeonSaveManager.Interfaces.Models;
 

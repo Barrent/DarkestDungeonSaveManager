@@ -1,6 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
-using Barrent.Common.WPF.Events;
+using Barrent.Common.Events;
 
 namespace DarkestDungeonSaveManager.Interfaces.Models;
 

@@ -1,9 +1,9 @@
 ﻿using System;
 using System.Collections.ObjectModel;
 using System.IO;
+using Barrent.Common.Models;
 using Barrent.Common.WPF.Converters;
 using Barrent.Common.WPF.Interfaces.ViewModels.Parameters;
-using Barrent.Common.WPF.Models;
 using Barrent.Common.WPF.ViewModels;
 using Barrent.Common.WPF.ViewModels.Parameters;
 using DarkestDungeonSaveManager.Interfaces.Models;

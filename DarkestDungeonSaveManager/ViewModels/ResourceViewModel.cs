@@ -1,5 +1,5 @@
 ﻿using System;
-using Barrent.Common.WPF.Interfaces.Models;
+using Barrent.Common.Interfaces.Models;
 using Barrent.Common.WPF.ViewModels.Parameters;
 using DarkestDungeonSaveManager.Interfaces.ViewModels;
 using DarkestDungeonSaveManager.Serialization.Estate;

@@ -1,10 +1,9 @@
-﻿using System;
-using System.Collections.Generic;
+﻿using System.Collections.Generic;
 using System.IO;
 using System.Linq;
-using Barrent.Common.WPF.Events;
-using Barrent.Common.WPF.Interfaces.Models;
-using Barrent.Common.WPF.Models;
+using Barrent.Common.Events;
+using Barrent.Common.Interfaces.Models;
+using Barrent.Common.Models;
 using DarkestDungeonSaveManager.Interfaces.Models;
 using DarkestDungeonSaveManager.Interfaces.Serialization;
 using DarkestDungeonSaveManager.Interfaces.Services;
