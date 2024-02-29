@@ -13,19 +13,16 @@ namespace DarkestDungeonSaveManager.Services;
 public class SettingsService : ISettingsService
 {
     private readonly ISettingsSerializer _settingsSerializer;
-    private readonly IProfileSerializer _profileSerializer;
     private readonly IDialogService _dialogService;
     private readonly IAppSettings _settings;
     private readonly IProfileManager _profileManager;
 
     public SettingsService(IDialogService dialogService, 
         ISettingsSerializer settingsSerializer,
-        IProfileSerializer profileSerializer,
         IAppSettings settings,
         IProfileManager profileManager)
     {
         _settingsSerializer = settingsSerializer;
-        _profileSerializer = profileSerializer;
         _dialogService = dialogService;
         _settings = settings;
         _profileManager = profileManager;
@@ -40,8 +37,6 @@ public class SettingsService : ISettingsService
         {
             ShowEditor();
         }
-
-        _profileSerializer.Load(_profileManager);
     }
 
 

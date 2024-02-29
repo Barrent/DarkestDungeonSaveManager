@@ -11,7 +11,7 @@ using Newtonsoft.Json.Converters;
 
 namespace DarkestDungeonSaveManager.Serialization;
 
-public class SaveGameSerializer : ISaveGameSerializer
+public class SaveGameParser : ISaveGameParser
 {
     private const string PersistCampaignLogFileName = "persist.campaign_log.json";
     private const string PersistEstateFileName = "persist.estate.json";

@@ -15,13 +15,13 @@ public class ProfileManager : IProfileManager
     private readonly List<IProfile> _profiles;
 
     private readonly IAppSettings _settings;
-    private ISaveGameSerializer _serializer;
+    private ISaveGameParser _parser;
     private readonly IBackupService _backupService;
 
-    public ProfileManager(IAppSettings settings, ISaveGameSerializer serializer, IBackupService backupService)
+    public ProfileManager(IAppSettings settings, ISaveGameParser parser, IBackupService backupService)
     {
         _settings = settings;
-        _serializer = serializer;
+        _parser = parser;
         _backupService = backupService;
         _profiles = new List<IProfile>();
         _settings.SaveGameFolderPath.ValueChanged += OnSaveGameFolderChanged;
@@ -53,7 +53,7 @@ public class ProfileManager : IProfileManager
 
     private Profile CreateProfile(string path)
     {
-        var profile = new Profile(path, _serializer, _backupService);
+        var profile = new Profile(path, _parser, _backupService);
        
 
         return profile;
