@@ -1,9 +1,14 @@
-﻿using DarkestDungeonSaveManager.Interfaces.Models;
-
-namespace DarkestDungeonSaveManager.Interfaces.Services;
+﻿namespace DarkestDungeonSaveManager.Interfaces.Services;
 
 public interface ISettingsService
 {
+    /// <summary>
+    /// Reloads settings from file.
+    /// </summary>
     void LoadSettings();
+
+    /// <summary>
+    /// Shows settings editor.
+    /// </summary>
     void ShowEditor();
 }

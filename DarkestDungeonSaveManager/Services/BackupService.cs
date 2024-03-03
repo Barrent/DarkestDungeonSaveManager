@@ -2,29 +2,39 @@
 using System.Collections.Generic;
 using System.IO;
 using System.Linq;
-using System.Text.RegularExpressions;
 using DarkestDungeonSaveManager.Interfaces.Models;
 using DarkestDungeonSaveManager.Interfaces.Services;
 
 namespace DarkestDungeonSaveManager.Services;
 
-public class BackupService : IBackupService
+/// <summary>
+/// Service to copy files from game folder and backup storage back and forth.
+/// </summary>
+/// <param name="settings">App settings.</param>
+public class BackupService(IAppSettings settings) : IBackupService
 {
-    private readonly IAppSettings _settings;
-
-    public BackupService(IAppSettings settings)
+    /// <summary>
+    /// Deletes save game from backup storage.
+    /// </summary>
+    /// <param name="saveGame">Save game to delete.</param>
+    public void Delete(ISaveGame saveGame)
     {
-        _settings = settings;
+        Directory.Delete(saveGame.Path, true);
     }
 
-    public IReadOnlyList<string> GetSaveGamePaths(string profileFolderName)
+    /// <summary>
+    /// Reads all the available save games from backup folder for the specified profile.
+    /// </summary>
+    /// <param name="profile">Game profile.</param>
+    /// <returns>Full paths to backed uo save games.</returns>
+    public IReadOnlyList<string> GetSaveGamePaths(IProfile profile)
     {
-        if (!Directory.Exists(_settings.BackupFolderPath.Value))
+        if (!Directory.Exists(settings.BackupFolderPath.Value))
         {
             return Array.Empty<string>();
         }
 
-        var backupFolder = GetBackupFolder(profileFolderName);
+        var backupFolder = GetBackupFolder(profile.FolderName.Value!);
         if (!Directory.Exists(backupFolder))
         {
             return Array.Empty<string>();
@@ -34,23 +44,28 @@ public class BackupService : IBackupService
         return directory.GetDirectories().Select(d => d.FullName).ToArray();
     }
 
-    public void Load(string profileFolderName, ISaveGame saveGame)
+    /// <summary>
+    /// Copies save game from the backup folder to the profile folder.
+    /// </summary>
+    /// <param name="profile">Game profile.</param>
+    /// <param name="saveGame">Save game to load.</param>
+    public void Load(IProfile profile, ISaveGame saveGame)
     {
-        var folder = new DirectoryInfo(profileFolderName);
+        var folder = new DirectoryInfo(profile.FolderPath.Value!);
         folder.Delete(true);
         folder.Create();
-        CopyDirectory(saveGame.Path, profileFolderName, true);
+        CopyDirectory(saveGame.Path, profile.FolderPath.Value!, true);
     }
 
-    public void Delete(ISaveGame saveGame)
-    {
-        Directory.Delete(saveGame.Path, true);
-    }
-
-    public string Save(string profileFolderName, ISaveGame saveGame)
+    /// <summary>
+    /// Copies active save game to the backup folder.
+    /// </summary>
+    /// <param name="profile">Game profile.</param>
+    /// <param name="saveGame">Save game to backup.</param>
+    public string Save(IProfile profile, ISaveGame saveGame)
     {
         var source = saveGame.Path;
-        var backupFolder = GetBackupFolder(profileFolderName);
+        var backupFolder = GetBackupFolder(profile.FolderName.Value!);
         var saveGameFolderName = GenerateSaveGameName(saveGame, backupFolder);
         backupFolder = Path.Combine(backupFolder, saveGameFolderName);
         CopyDirectory(source, backupFolder, true);
@@ -60,10 +75,11 @@ public class BackupService : IBackupService
 
     /// <summary>
     /// https://learn.microsoft.com/en-us/dotnet/standard/io/how-to-copy-directories
+    /// TODO: use extension method from new version of Barrent.Common package once its released.
     /// </summary>
-    /// <param name="sourcePath"></param>
-    /// <param name="destPath"></param>
-    /// <param name="recursive"></param>
+    /// <param name="sourcePath">Directory to copy.</param>
+    /// <param name="destPath">Destination path.</param>
+    /// <param name="recursive">Indicates if subdirectories should be copied as well.</param>
     /// <exception cref="DirectoryNotFoundException"></exception>
     private void CopyDirectory(string sourcePath, string destPath, bool recursive)
     {
@@ -98,6 +114,12 @@ public class BackupService : IBackupService
         }
     }
 
+    /// <summary>
+    /// Generates name of a folder containing backup.
+    /// </summary>
+    /// <param name="saveGame">Save game.</param>
+    /// <param name="profileBackupFolder">Backup folder of profile.</param>
+    /// <returns>Folder name of a backup.</returns>
     private string GenerateSaveGameName(ISaveGame saveGame, string profileBackupFolder)
     {
         var backupFolder = new DirectoryInfo(profileBackupFolder);
@@ -124,8 +146,13 @@ public class BackupService : IBackupService
         return baseFolderName;
     }
 
+    /// <summary>
+    /// Builds full path to profile backup folder.
+    /// </summary>
+    /// <param name="profileFolderName">Profile folder name.</param>
+    /// <returns>Full path to profile backup folder.</returns>
     private string GetBackupFolder(string profileFolderName)
     {
-        return Path.Combine(_settings.BackupFolderPath.Value, profileFolderName);
+        return Path.Combine(settings.BackupFolderPath.Value!, profileFolderName);
     }
 }

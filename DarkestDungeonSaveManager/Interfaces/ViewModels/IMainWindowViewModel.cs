@@ -4,9 +4,23 @@ using System.ComponentModel;
 
 namespace DarkestDungeonSaveManager.Interfaces.ViewModels;
 
+/// <summary>
+/// View model of the main window.
+/// </summary>
 public interface IMainWindowViewModel : INotifyPropertyChanged, IDisposable
 {
-    IMainMenuViewModel MenuViewModel { get; }
-    ObservableCollection<IProfileViewModel> Profiles { get; }
+    /// <summary>
+    /// Selected game profile.
+    /// </summary>
     IProfileViewModel? ActiveProfile { get; set; }
+
+    /// <summary>
+    /// Main menu.
+    /// </summary>
+    IMainMenuViewModel MenuViewModel { get; }
+
+    /// <summary>
+    /// Game profiles.
+    /// </summary>
+    ObservableCollection<IProfileViewModel> Profiles { get; }
 }

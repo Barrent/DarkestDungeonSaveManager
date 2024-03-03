@@ -116,7 +116,7 @@ public class Profile : IProfile
     /// <param name="saveGame">Save game to load.</param>
     public void Load(ISaveGame saveGame)
     {
-        _backupService.Load(FolderPath.Value!, saveGame);
+        _backupService.Load(this, saveGame);
         LoadSaveGameData(ActiveSave);
     }
 
@@ -126,7 +126,7 @@ public class Profile : IProfile
     public void LoadBackups()
     {
         _saves.Clear();
-        foreach (var saveGamePath in _backupService.GetSaveGamePaths(FolderName.Value!))
+        foreach (var saveGamePath in _backupService.GetSaveGamePaths(this))
         {
             var saveGame = new SaveGame() { Path = saveGamePath };
             LoadSaveGameData(saveGame);
@@ -141,7 +141,7 @@ public class Profile : IProfile
     /// <returns>Backed up save game.</returns>
     public ISaveGame Save()
     {
-        var path = _backupService.Save(FolderName.Value!, ActiveSave);
+        var path = _backupService.Save(this, ActiveSave);
         var saveGame = new SaveGame() { Path = path };
         LoadSaveGameData(saveGame);
         _saves.Add(saveGame);

@@ -61,7 +61,6 @@ public interface IProfile
     /// <param name="saveGame">Save game to load.</param>
     void Load(ISaveGame saveGame);
 
-
     /// <summary>
     /// Loads existing save games from backup folder into <see cref="Saves"/>.
     /// </summary>

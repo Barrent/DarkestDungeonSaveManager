@@ -55,7 +55,7 @@ namespace DarkestDungeonSaveManager
             services.AddSingleton<IBackupService, BackupService>();
 
             services.AddKeyedSingleton<Window, MainWindow>(ServiceKey.Main);
-            services.AddSingleton<IMainWindowController, MainWindowController>();
+            services.AddKeyedSingleton<IWindowController, MainWindowController>(ServiceKey.Main);
 
             services.AddSingleton<ISaveGameParser, SaveGameParser>();
             services.AddSingleton<ISettingsSerializer, SettingsSerializer>();
