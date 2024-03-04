@@ -1,5 +1,8 @@
 ﻿namespace DarkestDungeonSaveManager.Serialization.Estate;
 
+/// <summary>
+/// Known resource types.
+/// </summary>
 public enum ResourceType
 {
     Unrecognized,

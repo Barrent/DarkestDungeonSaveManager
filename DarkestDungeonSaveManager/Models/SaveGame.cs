@@ -6,8 +6,14 @@ using DarkestDungeonSaveManager.Resources;
 
 namespace DarkestDungeonSaveManager.Models;
 
+/// <summary>
+/// Save game data.
+/// </summary>
 public class SaveGame : ISaveGame
 {
+    /// <summary>
+    /// Initializes a new instance of <see cref="SaveGame"/>.
+    /// </summary>
     public SaveGame()
     {
         Week = new Parameter<int>(0) { Name = Strings.WeekParameterName };
@@ -26,26 +32,73 @@ public class SaveGame : ISaveGame
         Date = new Parameter<DateTime>(DateTime.MinValue);
     }
 
-    public IParameter<string> EstateName { get; }
-    public IParameter<int> Week { get; }
-
-    public IParameter<int> Gold { get; }
-
-    public IParameter<int> Busts { get; }
-
-    public IParameter<int> Portraits { get; }
-
-    public IParameter<int> Deeds { get; }
-
-    public IParameter<int> Crests { get; }
-
+    /// <summary>
+    /// Amount of blueprints.
+    /// </summary>
     public IParameter<int> Blueprints { get; }
 
+    /// <summary>
+    /// Amount of busts.
+    /// </summary>
+    public IParameter<int> Busts { get; }
+
+    /// <summary>
+    /// Amount of crests.
+    /// </summary>
+    public IParameter<int> Crests { get; }
+
+    /// <summary>
+    /// Save game date.
+    /// </summary>
+    public IParameter<DateTime> Date { get; set; }
+
+    /// <summary>
+    /// Amount of deeds.
+    /// </summary>
+    public IParameter<int> Deeds { get; }
+
+    /// <summary>
+    /// Difficulty level.
+    /// </summary>
+    public IParameter<string> Difficulty { get; set; }
+
+    /// <summary>
+    /// Profile name displayed in the game.
+    /// </summary>
+    public IParameter<string> EstateName { get; }
+
+    /// <summary>
+    /// Amount of gold.
+    /// </summary>
+    public IParameter<int> Gold { get; }
+
+    /// <summary>
+    /// Flag indicating if there is a raid in process.
+    /// </summary>
+    public IParameter<bool> IsInRaid { get; set; }
+
+    /// <summary>
+    /// Amount of memories.
+    /// </summary>
+    public IParameter<int> Memories { get; }
+
+    /// <summary>
+    /// Path to the save game.
+    /// </summary>
+    public string Path { get; set; }
+
+    /// <summary>
+    /// Amount of portraits.
+    /// </summary>
+    public IParameter<int> Portraits { get; }
+
+    /// <summary>
+    /// Amount of shards.
+    /// </summary>
     public IParameter<int> Shards { get; }
 
-    public IParameter<int> Memories { get; }
-    public IParameter<string> Difficulty { get; set; }
-    public IParameter<bool> IsInRaid { get; set; }
-    public IParameter<DateTime> Date { get; set; }
-    public string Path { get; set; }
+    /// <summary>
+    /// Number of weeks passed.
+    /// </summary>
+    public IParameter<int> Week { get; }
 }

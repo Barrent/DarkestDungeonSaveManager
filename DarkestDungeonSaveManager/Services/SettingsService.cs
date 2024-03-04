@@ -4,30 +4,49 @@ using Barrent.Common.WPF.Services;
 using DarkestDungeonSaveManager.Interfaces.Models;
 using DarkestDungeonSaveManager.Interfaces.Serialization;
 using DarkestDungeonSaveManager.Interfaces.Services;
-using DarkestDungeonSaveManager.Serialization;
 using DarkestDungeonSaveManager.ViewModels;
 using DarkestDungeonSaveManager.Views;
 
 namespace DarkestDungeonSaveManager.Services;
 
+/// <summary>
+/// Loads/Edits app settings.
+/// </summary>
 public class SettingsService : ISettingsService
 {
-    private readonly ISettingsSerializer _settingsSerializer;
+    /// <summary>
+    /// Dialog service.
+    /// </summary>
     private readonly IDialogService _dialogService;
-    private readonly IAppSettings _settings;
-    private readonly IProfileManager _profileManager;
 
+    /// <summary>
+    /// App settings.
+    /// </summary>
+    private readonly IAppSettings _settings;
+
+    /// <summary>
+    /// (De)Serializes settings.
+    /// </summary>
+    private readonly ISettingsSerializer _settingsSerializer;
+
+    /// <summary>
+    /// Initializes a new instance of <see cref="SettingsService"/>.
+    /// </summary>
+    /// <param name="dialogService">Dialog service.</param>
+    /// <param name="settingsSerializer">Settings serializer.</param>
+    /// <param name="settings">App settings.</param>
     public SettingsService(IDialogService dialogService, 
         ISettingsSerializer settingsSerializer,
-        IAppSettings settings,
-        IProfileManager profileManager)
+        IAppSettings settings)
     {
         _settingsSerializer = settingsSerializer;
         _dialogService = dialogService;
         _settings = settings;
-        _profileManager = profileManager;
     }
 
+    /// <summary>
+    /// Reloads settings from file.
+    /// </summary>
     public void LoadSettings()
     {
         _settingsSerializer.Load(_settings);
@@ -40,11 +59,9 @@ public class SettingsService : ISettingsService
     }
 
 
-    public void SaveSettings()
-    {
-        _settingsSerializer.Save(_settings);
-    }
-
+    /// <summary>
+    /// Shows settings editor.
+    /// </summary>
     public void ShowEditor()
     {
         var window = new SettingsWindow();
@@ -55,5 +72,13 @@ public class SettingsService : ISettingsService
         {
             SaveSettings();
         };
+    }
+
+    /// <summary>
+    /// Saves updated settings.
+    /// </summary>
+    private void SaveSettings()
+    {
+        _settingsSerializer.Save(_settings);
     }
 }

@@ -2,6 +2,10 @@
 using DarkestDungeonSaveManager.Interfaces.Models;
 
 namespace DarkestDungeonSaveManager.Interfaces.Services;
+
+/// <summary>
+/// Copies save games from the game folder to the storage and back.
+/// </summary>
 public interface IBackupService
 {
     /// <summary>

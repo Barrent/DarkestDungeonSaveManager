@@ -1,5 +1,8 @@
 ﻿namespace DarkestDungeonSaveManager.Interfaces.Services;
 
+/// <summary>
+/// Loads/Edits app settings.
+/// </summary>
 public interface ISettingsService
 {
     /// <summary>
