@@ -4,6 +4,9 @@ using Barrent.Common.WPF.Interfaces.ViewModels.Parameters;
 
 namespace DarkestDungeonSaveManager.Interfaces.ViewModels;
 
+/// <summary>
+/// Player profile view model.
+/// </summary>
 public interface IProfileViewModel
 {
     /// <summary>

@@ -1,6 +1,5 @@
 ﻿using System;
 using System.IO;
-using System.Linq;
 using DarkestDungeonSaveManager.Interfaces.Serialization;
 using DarkestDungeonSaveManager.Native;
 using DarkestDungeonSaveManager.Serialization.CampaignLog;

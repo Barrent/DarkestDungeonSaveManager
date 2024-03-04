@@ -10,7 +10,7 @@ namespace DarkestDungeonSaveManager.Interfaces.ViewModels;
 public interface IMainWindowViewModel : INotifyPropertyChanged, IDisposable
 {
     /// <summary>
-    /// Selected game profile.
+    /// Selected player profile.
     /// </summary>
     IProfileViewModel? ActiveProfile { get; set; }
 
@@ -20,7 +20,7 @@ public interface IMainWindowViewModel : INotifyPropertyChanged, IDisposable
     IMainMenuViewModel MenuViewModel { get; }
 
     /// <summary>
-    /// Game profiles.
+    /// Player profiles.
     /// </summary>
     ObservableCollection<IProfileViewModel> Profiles { get; }
 }

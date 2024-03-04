@@ -42,6 +42,6 @@ public static class DarkestSavior
     {
         var goPath = new GoString(path);
         var ptr = Convert(goPath);
-        return Marshal.PtrToStringAnsi(ptr);
+        return Marshal.PtrToStringAnsi(ptr)!;
     }
 }

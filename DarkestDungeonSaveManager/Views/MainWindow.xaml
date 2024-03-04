@@ -6,7 +6,6 @@
         xmlns:local="clr-namespace:DarkestDungeonSaveManager"
         xmlns:resources="clr-namespace:DarkestDungeonSaveManager.Resources"
         xmlns:viewModels="clr-namespace:DarkestDungeonSaveManager.Interfaces.ViewModels"
-        xmlns:views="clr-namespace:Barrent.Common.WPF.Views;assembly=Barrent.Common.WPF"
         mc:Ignorable="d"
         Title="Darkest Dungeon Save Manager" Height="600" Width="800"
         WindowStartupLocation="CenterScreen"

@@ -45,7 +45,7 @@ public class Profile : IProfile
         FolderName = new Parameter<string>(directory.Name);
         FolderPath = new Parameter<string>(path);
         DisplayName = new Parameter<string>(directory.Name);
-        ActiveSave = new SaveGame { Path = FolderPath.Value! };
+        ActiveSave = new SaveGame(FolderPath.Value!);
         LoadSaveGameData(ActiveSave);
 
         _saves = new List<ISaveGame>();
@@ -128,7 +128,7 @@ public class Profile : IProfile
         _saves.Clear();
         foreach (var saveGamePath in _backupService.GetSaveGamePaths(this))
         {
-            var saveGame = new SaveGame() { Path = saveGamePath };
+            var saveGame = new SaveGame(saveGamePath);
             LoadSaveGameData(saveGame);
             _saves.Add(saveGame);
             SaveGameAdded?.Invoke(this, new SaveGameAddedEventArgs(saveGame));
@@ -142,7 +142,7 @@ public class Profile : IProfile
     public ISaveGame Save()
     {
         var path = _backupService.Save(this, ActiveSave);
-        var saveGame = new SaveGame() { Path = path };
+        var saveGame = new SaveGame(path);
         LoadSaveGameData(saveGame);
         _saves.Add(saveGame);
         SaveGameAdded?.Invoke(this, new SaveGameAddedEventArgs(saveGame));

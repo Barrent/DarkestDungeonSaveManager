@@ -14,8 +14,10 @@ public class SaveGame : ISaveGame
     /// <summary>
     /// Initializes a new instance of <see cref="SaveGame"/>.
     /// </summary>
-    public SaveGame()
+    public SaveGame(string path)
     {
+        Path = path;
+
         Week = new Parameter<int>(0) { Name = Strings.WeekParameterName };
         EstateName = new Parameter<string>(string.Empty) { Name = Strings.EstateParameterName };
         Difficulty = new Parameter<string>(string.Empty) { Name = Strings.DifficultyParameterName };
@@ -85,7 +87,7 @@ public class SaveGame : ISaveGame
     /// <summary>
     /// Path to the save game.
     /// </summary>
-    public string Path { get; set; }
+    public string Path { get; }
 
     /// <summary>
     /// Amount of portraits.

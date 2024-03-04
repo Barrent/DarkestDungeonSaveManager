@@ -61,7 +61,7 @@ public interface ISaveGame
     /// <summary>
     /// Path to the save game.
     /// </summary>
-    string Path { get; set; }
+    string Path { get; }
 
     /// <summary>
     /// Amount of portraits.

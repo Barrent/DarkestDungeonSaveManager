@@ -5,6 +5,9 @@ using Barrent.Common.WPF.Interfaces.ViewModels.Parameters;
 
 namespace DarkestDungeonSaveManager.Interfaces.ViewModels;
 
+/// <summary>
+/// View model of a save game.
+/// </summary>
 public interface ISaveGameViewModel : ISelectableViewModel
 {
     /// <summary>
