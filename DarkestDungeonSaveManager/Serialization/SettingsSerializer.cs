@@ -6,15 +6,28 @@ using Newtonsoft.Json;
 
 namespace DarkestDungeonSaveManager.Serialization;
 
+/// <summary>
+/// Serializes app settings.
+/// </summary>
 public class SettingsSerializer : ISettingsSerializer
 {
+    /// <summary>
+    /// Path to settings file.
+    /// </summary>
     private readonly string _settingFilePath;
 
+    /// <summary>
+    /// Initializes a new instance of <see cref="SettingsSerializer"/>.
+    /// </summary>
     public SettingsSerializer()
     {
         _settingFilePath = Path.Combine(Environment.CurrentDirectory, "Settings.json");
     }
 
+    /// <summary>
+    /// Loads app settings.
+    /// </summary>
+    /// <param name="settings">Settings.</param>
     public void Load(IAppSettings settings)
     {
         if (!File.Exists(_settingFilePath))
@@ -28,6 +41,10 @@ public class SettingsSerializer : ISettingsSerializer
         settings.BackupFolderPath.Value = serializable.BackupFolderPath;
     }
 
+    /// <summary>
+    /// Saves app settings.
+    /// </summary>
+    /// <param name="settings">Settings.</param>
     public void Save(IAppSettings settings)
     {
         var serializable = Serialize(settings);
@@ -35,6 +52,11 @@ public class SettingsSerializer : ISettingsSerializer
         File.WriteAllText(_settingFilePath, serialized);
     }
 
+    /// <summary>
+    /// Serializes settings.
+    /// </summary>
+    /// <param name="settings">Settings to serialize.</param>
+    /// <returns>Serialized settings.</returns>
     private SerializableSettings Serialize(IAppSettings settings)
     {
         return new SerializableSettings
