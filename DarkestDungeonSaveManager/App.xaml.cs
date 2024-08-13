@@ -1,4 +1,5 @@
 ﻿using System.Windows;
+using Barrent.Common.WPF;
 using Barrent.Common.WPF.Interfaces.Services;
 using Barrent.Common.WPF.Services;
 using DarkestDungeonSaveManager.Interfaces.Models;
@@ -18,48 +19,18 @@ namespace DarkestDungeonSaveManager
     /// <summary>
     /// Interaction logic for App.xaml
     /// </summary>
-    public partial class App : Application
+    public partial class App : BaseApp
     {
-        /// <summary>
-        /// DI container.
-        /// </summary>
-        private readonly IHost appHost;
-
-        /// <summary>
-        /// Initializes a new instance of <see cref="App"/>.
-        /// </summary>
-        public App()
-        {
-            appHost = Host.CreateDefaultBuilder().ConfigureServices(Register).Build();
-        }
-
         /// <summary>
         /// Raises the <see cref="Application.Startup" /> event.
         /// </summary>
         /// <param name="e">A <see cref="StartupEventArgs" /> that contains the event data.</param>
-        protected override async void OnStartup(StartupEventArgs e)
+        protected override void OnStartup(StartupEventArgs e)
         {
-            await appHost.StartAsync();
-
-            var window = appHost.Services.GetKeyedService<Window>(ServiceKey.Main);
-            var viewModel = appHost.Services.GetRequiredService<IMainWindowViewModel>();
-            window!.DataContext = viewModel;
-            window.Show();
-
-            var settings = appHost.Services.GetRequiredService<ISettingsService>();
-            settings.LoadSettings();
-
             base.OnStartup(e);
-        }
 
-        /// <summary>
-        /// Raises the <see cref="Application.Exit" /> event.
-        /// </summary>
-        /// <param name="e">An <see cref="ExitEventArgs" /> that contains the event data.</param>
-        protected override async void OnExit(ExitEventArgs e)
-        {
-            await appHost.StopAsync();
-            base.OnExit(e);
+            var settings = Container!.Services.GetRequiredService<ISettingsService>();
+            settings.LoadSettings();
         }
 
         /// <summary>
@@ -67,7 +38,7 @@ namespace DarkestDungeonSaveManager
         /// </summary>
         /// <param name="context">Build context.</param>
         /// <param name="services">Services.</param>
-        private void Register(HostBuilderContext context, IServiceCollection services)
+        protected override void RegisterDependencies(HostBuilderContext context, IServiceCollection services)
         {
             services.AddSingleton<IDialogService, DialogService>();
             services.AddSingleton<IBackupService, BackupService>();
@@ -83,6 +54,24 @@ namespace DarkestDungeonSaveManager
 
             services.AddSingleton<IMainWindowViewModel, MainWindowViewModel>();
             services.AddSingleton<IMainMenuViewModel, MainMenuViewModel>();
+        }
+
+        /// <summary>
+        /// Creates instance of the main window.
+        /// </summary>
+        /// <returns>Main window.</returns>
+        protected override Window ResolveMainWindow()
+        {
+            return Container!.Services.GetKeyedService<Window>(ServiceKey.Main)!;
+        }
+
+        /// <summary>
+        /// Creates data context of the main window.
+        /// </summary>
+        /// <returns>View model of thr main window.</returns>
+        protected override object ResolveMainWindowDataContext()
+        {
+            return Container!.Services.GetRequiredService<IMainWindowViewModel>();
         }
     }
 }

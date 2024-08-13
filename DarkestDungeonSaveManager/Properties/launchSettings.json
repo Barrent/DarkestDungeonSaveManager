@@ -1,0 +1,8 @@
+{
+  "profiles": {
+    "DarkestDungeonSaveManager": {
+      "commandName": "Project",
+      "hotReloadEnabled": true
+    }
+  }
+}

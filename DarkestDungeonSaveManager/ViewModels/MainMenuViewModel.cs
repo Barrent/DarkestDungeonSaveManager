@@ -3,6 +3,7 @@ using Barrent.Common.WPF.Commands;
 using Barrent.Common.WPF.Interfaces.Services;
 using Barrent.Common.WPF.Interfaces.ViewModels;
 using Barrent.Common.WPF.Services;
+using Barrent.Common.WPF.ViewModels;
 using DarkestDungeonSaveManager.Interfaces.Services;
 using DarkestDungeonSaveManager.Interfaces.ViewModels;
 using DarkestDungeonSaveManager.Resources;
