@@ -6,6 +6,9 @@ MinimumVisualStudioVersion = 10.0.40219.1
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "DarkestDungeonSaveManager", "DarkestDungeonSaveManager\DarkestDungeonSaveManager.csproj", "{2D45C52B-F239-4D04-A6DB-A7BA764A87AE}"
 EndProject
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "WixSharpSetup", "WixSharpSetup\WixSharpSetup.csproj", "{6BB71D41-BCDB-4837-8D8D-500F6EADD01E}"
+	ProjectSection(ProjectDependencies) = postProject
+		{2D45C52B-F239-4D04-A6DB-A7BA764A87AE} = {2D45C52B-F239-4D04-A6DB-A7BA764A87AE}
+	EndProjectSection
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
