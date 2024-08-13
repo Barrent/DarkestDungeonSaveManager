@@ -2,6 +2,7 @@
 using System.Collections.Generic;
 using System.IO;
 using System.Linq;
+using Barrent.Common.Extensions;
 using DarkestDungeonSaveManager.Interfaces.Models;
 using DarkestDungeonSaveManager.Interfaces.Services;
 
@@ -54,7 +55,8 @@ public class BackupService(IAppSettings settings) : IBackupService
         var folder = new DirectoryInfo(profile.FolderPath.Value!);
         folder.Delete(true);
         folder.Create();
-        CopyDirectory(saveGame.Path, profile.FolderPath.Value!, true);
+
+        CopyDirectory(saveGame.Path, profile.FolderPath.Value!);
     }
 
     /// <summary>
@@ -68,50 +70,20 @@ public class BackupService(IAppSettings settings) : IBackupService
         var backupFolder = GetBackupFolder(profile.FolderName.Value!);
         var saveGameFolderName = GenerateSaveGameName(saveGame, backupFolder);
         backupFolder = Path.Combine(backupFolder, saveGameFolderName);
-        CopyDirectory(source, backupFolder, true);
+        CopyDirectory(source, backupFolder);
 
         return backupFolder;
     }
 
     /// <summary>
-    /// https://learn.microsoft.com/en-us/dotnet/standard/io/how-to-copy-directories
-    /// TODO: use extension method from new version of Barrent.Common package once its released.
+    /// Copies directory recursive.
     /// </summary>
     /// <param name="sourcePath">Directory to copy.</param>
     /// <param name="destPath">Destination path.</param>
-    /// <param name="recursive">Indicates if subdirectories should be copied as well.</param>
-    /// <exception cref="DirectoryNotFoundException"></exception>
-    private void CopyDirectory(string sourcePath, string destPath, bool recursive)
+    private void CopyDirectory(string sourcePath, string destPath)
     {
-        // Get information about the source directory
         var sourceDirectory = new DirectoryInfo(sourcePath);
-
-        // Check if the source directory exists
-        if (!sourceDirectory.Exists)
-            throw new DirectoryNotFoundException($"Source directory not found: {sourceDirectory.FullName}");
-
-        // Cache directories before we start copying
-        var dirs = sourceDirectory.GetDirectories();
-
-        // Create the destination directory
-        Directory.CreateDirectory(destPath);
-
-        // Get the files in the source directory and copy to the destination directory
-        foreach (var file in sourceDirectory.GetFiles())
-        {
-            var targetFilePath = Path.Combine(destPath, file.Name);
-            file.CopyTo(targetFilePath);
-        }
-
-        // If recursive and copying subdirectories, recursively call this method
-        if (recursive)
-        {
-            foreach (var subDir in dirs)
-            {
-                var newDestinationDir = Path.Combine(destPath, subDir.Name);
-                CopyDirectory(subDir.FullName, newDestinationDir, true);
-            }
-        }
+        sourceDirectory.CopyDirectory(destPath, true);
     }
 
     /// <summary>

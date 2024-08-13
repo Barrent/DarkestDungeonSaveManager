@@ -1,0 +1,25 @@
+﻿<Wix xmlns="http://wixtoolset.org/schemas/v4/wxs"
+     xmlns:ui="http://wixtoolset.org/schemas/v4/wxs/ui"
+     >
+  <Package Name="Darkest Dungeon SaveGame Manager" 
+           Manufacturer="Barrent" 
+           Version="0.9.0.0" 
+           ProductCode="6478d664-2a90-4ae9-bdaf-fc96e6d53eb9"
+           UpgradeCode="4a22c919-4365-4279-995f-94048d7e64e6">
+    <MajorUpgrade DowngradeErrorMessage="!(loc.DowngradeError)" />
+
+    <MediaTemplate EmbedCab="yes" />
+
+    <!-- https://wixtoolset.org/docs/tools/wixext/wixui/#dialog-sets -->
+    <!-- https://github.com/oleg-shilo/wixsharp-->
+    <ui:WixUI
+      Id="WixUI_InstallDir"
+      InstallDirectory="INSTALLFOLDER"
+    />
+
+    <Feature Id="Main">
+      <ComponentGroupRef Id="AppComponents" />
+      <ComponentRef Id="ProgramMenuShortcutComponent" />
+    </Feature>
+  </Package>
+</Wix>
