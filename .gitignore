@@ -362,3 +362,5 @@ MigrationBackup/
 # Fody - auto-generated XML schema
 FodyWeavers.xsd
 /WixSharpSetup/Installer/Darkest Dungeon SaveGame Manager.msi
+/Source/WixSharpSetup/Installer/Darkest Dungeon SaveGame Manager.msi
+/Source/WixSharpSetup/wix/WixSharpSetup.g.wxs
