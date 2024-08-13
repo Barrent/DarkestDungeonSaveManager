@@ -25,6 +25,11 @@ namespace WixSharpSetup
             Loaded += OnLoaded;
         }
 
+        /// <summary>
+        /// Handles <see cref="InstallDirDialog.Loaded"/> event.
+        /// </summary>
+        /// <param name="sender"></param>
+        /// <param name="e"></param>
         private void OnLoaded(object sender, RoutedEventArgs e)
         {
             Localize();
