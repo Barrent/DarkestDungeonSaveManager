@@ -6,19 +6,31 @@ using System.Windows;
 using CommandLine;
 using Microsoft.WindowsAPICodePack.Dialogs;
 using WixSharp;
+using WixSharpSetup.Dialogs;
 using WixSharpSetup.Extensions;
 using WixSharpSetup.Models;
 using File = WixSharp.File;
 
 namespace WixSharpSetup
 {
+    /// <summary>
+    /// Entry point.
+    /// </summary>
     internal class Program
     {
+        /// <summary>
+        /// Entry point.
+        /// </summary>
+        /// <param name="args"></param>
         public static void Main(string[] args)
         {
             Parser.Default.ParseArguments<Options>(args).WithParsed(Run).WithNotParsed(HandleParseError);
         }
 
+        /// <summary>
+        /// Creates a list of files to include to the installer.
+        /// </summary>
+        /// <returns>A list of files to include to the installer.</returns>
         private static IEnumerable<WixEntity> CreateFileList()
         {
             var sourceFolder = Environment.GetEnvironmentVariable("ide") == "true" ? Preferences.IdeSourceFolder : Preferences.SourceFolder;
@@ -87,15 +99,27 @@ namespace WixSharpSetup
             return relativeUri.ToString().Replace("/", "\\");
         }
 
-        private static void HandleParseError(IEnumerable<CommandLine.Error> obj)
+        /// <summary>
+        /// Handles error in command line args.
+        /// </summary>
+        /// <param name="args">Args.</param>
+        private static void HandleParseError(IEnumerable<CommandLine.Error> args)
         {
         }
 
+        /// <summary>
+        /// Handles installer exceptions.
+        /// </summary>
+        /// <param name="e">Event args.</param>
         private static void OnUnhandledException(ExceptionEventArgs e)
         {
             MessageBox.Show(e.Exception.Message);
         }
 
+        /// <summary>
+        /// Creates the installer.
+        /// </summary>
+        /// <param name="options">Installer options.</param>
         private static void Run(Options options)
         {
             var project = new ManagedProject(Preferences.ProductName,
@@ -105,9 +129,7 @@ namespace WixSharpSetup
             project.GUID = Preferences.ProductCode;
             project.UpgradeCode = Preferences.UpgradeCode;
             project.Version = new Version(options.Version);
-            project.ControlPanelInfo.Manufacturer = "Barrent";
-
-            // project.ManagedUI = ManagedUI.DefaultWpf; // all stock UI dialogs
+            project.ControlPanelInfo.Manufacturer = Preferences.Manufacturer;
 
             //custom set of UI WPF dialogs
             project.ManagedUI = new ManagedUI();
@@ -122,6 +144,7 @@ namespace WixSharpSetup
                 .Add<ProgressDialog>()
                 .Add<ExitDialog>();
 
+            // 3d-party dependencies used by the installer.
             project.DefaultRefAssemblies.Add(typeof(DialogControl).Assembly.Location);
             project.DefaultRefAssemblies.Add(typeof(CommonOpenFileDialog).Assembly.Location);
 

@@ -1,13 +1,13 @@
-using Caliburn.Micro;
 using System.Security.Principal;
 using System.Windows.Media.Imaging;
+using Caliburn.Micro;
 using WixSharp;
 using WixSharp.CommonTasks;
 using WixSharp.UI.Forms;
 using WixSharp.UI.WPF;
 using WixToolset.Dtf.WindowsInstaller;
 
-namespace WixSharpSetup
+namespace WixSharpSetup.Dialogs
 {
     /// <summary>
     /// The standard ProgressDialog.

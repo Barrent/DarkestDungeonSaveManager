@@ -4,7 +4,7 @@ using WixSharp;
 using WixSharp.UI.WPF;
 using WixSharpSetup.ViewModels;
 
-namespace WixSharpSetup
+namespace WixSharpSetup.Dialogs
 {
     /// <summary>
     /// The standard InstallDirDialog.

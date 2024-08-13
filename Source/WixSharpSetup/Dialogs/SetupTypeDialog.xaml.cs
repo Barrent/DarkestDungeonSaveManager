@@ -1,12 +1,11 @@
-using Caliburn.Micro;
 using System.Linq;
 using System.Windows.Media.Imaging;
+using Caliburn.Micro;
 using WixSharp;
 using WixSharp.UI.Forms;
-
 using WixSharp.UI.WPF;
 
-namespace WixSharpSetup
+namespace WixSharpSetup.Dialogs
 {
     /// <summary>
     /// The standard SetupTypeDialog.
