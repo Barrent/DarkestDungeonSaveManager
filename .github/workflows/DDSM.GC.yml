@@ -21,6 +21,9 @@ jobs:
 
     runs-on: windows-latest
 
+    permissions:
+      packages: read
+
     steps:
     - name: Checkout
       uses: actions/checkout@v4
@@ -35,12 +38,15 @@ jobs:
 
     - name: Restore packages
       run: dotnet restore
+      working-directory: Source
 
     - name: Setup MSBuild.exe
       uses: microsoft/setup-msbuild@v2
 
     - name: Build
       run: dotnet build --no-restore
+      working-directory: Source
 
     - name: Run tests
       run: dotnet test --logger trx --results-directory "TestResults"
+      working-directory: Source
