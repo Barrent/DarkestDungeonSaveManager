@@ -12,7 +12,7 @@ on:
     branches: [ "master" ]
 
 env:
-  NUGET_USER: el.barrent@gmail.com
+  NUGET_USER: Barrent
   NUGET_AUTH_TOKEN: ${{secrets.GITHUB_TOKEN}}
 
 jobs:
