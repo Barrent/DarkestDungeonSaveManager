@@ -11,6 +11,10 @@ on:
   pull_request:
     branches: [ "master" ]
 
+env:
+  NUGET_USER: Barrent
+  NUGET_AUTH_TOKEN: ${{secrets.NUGET_TOKEN_READ}}
+
 jobs:
 
   build:
@@ -23,6 +27,7 @@ jobs:
 
     permissions:
       packages: read
+      contents: read
 
     steps:
     - name: Checkout
@@ -36,9 +41,12 @@ jobs:
     - name: Setup Wix
       run: dotnet tool install --global wix
 
+    - name: 'Add source'
+      run: dotnet nuget add source --username ${{ env.NUGET_USER }} --password ${{ env.NUGET_AUTH_TOKEN }} --store-password-in-clear-text --name github "https://nuget.pkg.github.com/Barrent/index.json"
+
     - name: Restore packages
       run: dotnet restore
-      working-directory: Source
+      working-directory: Source      
 
     - name: Setup MSBuild.exe
       uses: microsoft/setup-msbuild@v2

@@ -13,7 +13,7 @@ namespace WixSharpSetup.Interfaces.ViewModels
         ICommand BrowseCommand { get; }
 
         /// <summary>
-        /// Selected installation path. 
+        /// Selected installation path.
         /// </summary>
         string InstallDirPath { get; set; }
     }
