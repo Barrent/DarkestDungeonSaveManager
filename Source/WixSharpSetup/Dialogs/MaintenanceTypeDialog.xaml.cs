@@ -1,27 +1,25 @@
-using Caliburn.Micro;
-using System.Linq;
 using System.Windows.Media.Imaging;
+using Caliburn.Micro;
 using WixSharp;
 using WixSharp.UI.Forms;
-
 using WixSharp.UI.WPF;
 
-namespace WixSharpSetup
+namespace WixSharpSetup.Dialogs
 {
     /// <summary>
-    /// The standard SetupTypeDialog.
+    /// The standard MaintenanceTypeDialog.
     /// <para>Follows the design of the canonical Caliburn.Micro View (MVVM).</para>
     /// <para>See https://caliburnmicro.com/documentation/cheat-sheet</para>
     /// </summary>
     /// <seealso cref="WixSharp.UI.WPF.WpfDialog" />
     /// <seealso cref="WixSharp.IWpfDialog" />
     /// <seealso cref="System.Windows.Markup.IComponentConnector" />
-    public partial class SetupTypeDialog : WpfDialog, IWpfDialog
+    public partial class MaintenanceTypeDialog : WpfDialog, IWpfDialog
     {
         /// <summary>
-        /// Initializes a new instance of the <see cref="SetupTypeDialog" /> class.
+        /// Initializes a new instance of the <see cref="MaintenanceTypeDialog" /> class.
         /// </summary>
-        public SetupTypeDialog()
+        public MaintenanceTypeDialog()
         {
             InitializeComponent();
         }
@@ -32,17 +30,17 @@ namespace WixSharpSetup
         /// </summary>
         public void Init()
         {
-            ViewModelBinder.Bind(new SetupTypeDialogModel { Host = ManagedFormHost, }, this, null);
+            ViewModelBinder.Bind(new MaintenanceTypeDialogModel { Host = ManagedFormHost, }, this, null);
         }
     }
 
     /// <summary>
-    /// ViewModel for standard SetupTypeDialog.
+    /// ViewModel for standard MaintenanceTypeDialog.
     /// <para>Follows the design of the canonical Caliburn.Micro ViewModel (MVVM).</para>
     /// <para>See https://caliburnmicro.com/documentation/cheat-sheet</para>
     /// </summary>
     /// <seealso cref="Caliburn.Micro.Screen" />
-    internal class SetupTypeDialogModel : Caliburn.Micro.Screen
+    internal class MaintenanceTypeDialogModel : Caliburn.Micro.Screen
     {
         public ManagedForm Host;
 
@@ -52,7 +50,7 @@ namespace WixSharpSetup
         public BitmapImage Banner => session?.GetResourceBitmap("WixSharpUI_Bmp_Banner").ToImageSource();
 
         /// <summary>
-        /// Initializes a new instance of the <see cref="SetupTypeDialog" /> class.
+        /// Initializes a new instance of the <see cref="MaintenanceTypeDialog" /> class.
         /// </summary>
         void JumpToProgressDialog()
         {
@@ -63,34 +61,39 @@ namespace WixSharpSetup
                 shell.GoNext(); // if user did not supply progress dialog then simply go next
         }
 
-        public void DoTypical()
+        public void Change()
         {
-            if (shell != null)
-                JumpToProgressDialog();
+            if (session != null)
+            {
+                session["MODIFY_ACTION"] = "Change";
+                shell.GoNext();
+            }
         }
 
-        public void DoComplete()
+        public void Repair()
         {
-            if (shell != null)
+            if (session != null)
             {
-                // mark all features to be installed
-                string[] names = session.Features.Select(x => x.Name).ToArray();
-                session["ADDLOCAL"] = names.JoinBy(",");
+                session["MODIFY_ACTION"] = "Repair";
+                JumpToProgressDialog();
+            }
+        }
+
+        public void Remove()
+        {
+            if (session != null)
+            {
+                session["REMOVE"] = "ALL";
+                session["MODIFY_ACTION"] = "Remove";
 
                 JumpToProgressDialog();
             }
         }
 
-        public void DoCustom()
-            => shell?.GoNext(); // let the dialog flow through
-
         public void GoPrev()
             => shell?.GoPrev();
 
-        public void GoNext()
-            => shell?.GoNext();
-
         public void Cancel()
-            => shell?.Cancel();
+            => Host?.Shell.Cancel();
     }
 }

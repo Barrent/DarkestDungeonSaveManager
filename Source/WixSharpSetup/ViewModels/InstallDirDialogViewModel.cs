@@ -18,16 +18,29 @@ namespace WixSharpSetup.ViewModels
     /// </summary>
     public class InstallDirDialogViewModel : DialogViewModelBase, IInstallDirDialogViewModel
     {
+        /// <summary>
+        /// Initializes a new instance of <see cref="InstallDirDialogViewModel"/>.
+        /// </summary>
+        /// <param name="host">Dialog host.</param>
         public InstallDirDialogViewModel(ManagedForm host) : base(host)
         {
             BrowseCommand = new ActionCommand(ChangeInstallDir);
         }
 
+        /// <summary>
+        /// WixSharp banner.
+        /// </summary>
         public BitmapImage Banner => Session?.GetResourceBitmap("WixSharpUI_Bmp_Banner").ToImageSource();
 
 
+        /// <summary>
+        /// Command to display dialog to select installation path.
+        /// </summary>
         public ICommand BrowseCommand { get; }
 
+        /// <summary>
+        /// Selected installation path.
+        /// </summary>
         public string InstallDirPath
         {
             get
@@ -64,10 +77,19 @@ namespace WixSharpSetup.ViewModels
             }
         }
 
+        /// <summary>
+        /// Shortcut for install directory key.
+        /// </summary>
         private string InstallDirProperty => Session?.Property("WixSharp_UI_INSTALLDIR");
 
+        /// <summary>
+        /// Shortcut for the current session.
+        /// </summary>
         private ISession Session => Host?.Runtime.Session;
 
+        /// <summary>
+        /// Shows a dialog to select a folder.
+        /// </summary>
         public void ChangeInstallDir()
         {
             try

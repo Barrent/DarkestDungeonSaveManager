@@ -1,4 +1,3 @@
-using Caliburn.Micro;
 using System;
 using System.Diagnostics;
 using System.IO;
@@ -6,12 +5,13 @@ using System.Text;
 using System.Windows;
 using System.Windows.Controls;
 using System.Windows.Media.Imaging;
+using Caliburn.Micro;
 using WixSharp;
 using WixSharp.UI.Forms;
 using WixSharp.UI.WPF;
 using IO = System.IO;
 
-namespace WixSharpSetup
+namespace WixSharpSetup.Dialogs
 {
     /// <summary>
     /// The standard LicenceDialog.
